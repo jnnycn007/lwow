@@ -1,7 +1,8 @@
 # Lightweight onewire library
 
 LwOW is lightweight, platform independent library for Onewire protocol for embedded systems.
-Its primary focus is UART hardware for physical communication for sensors and other slaves.
+Its primary focus is to allow UART peripheral (hardware) for physical communication for sensors and other slaves.
+Alternatively, the separation of the LwOW and low-level system-related part allows direct GPIO in/out toggling, for a simple communication.
 
 More about 1-Wire over UART can be found on link below.
 
