@@ -33,6 +33,8 @@
 		]
 	},
     "build": {
-        "includeDir": "lwow/src/include"
+        "includeDir": "lwow/src/include",
+        "srcDir": ".",
+        "srcFilter": "+<lwow>"
     }
 }

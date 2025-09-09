@@ -13,6 +13,7 @@
 - Add `lwow_ds18x20_get_alarm_temp` and `lwow_ds18x20_get_temp_conversion_time`
 - Remove deprecated functions, prepare for version `4.0.0`
 - Rework library CMake with removed INTERFACE type
+- Fix the platformio library package description
 
 ## v3.0.2
 
