@@ -143,7 +143,7 @@ typedef struct {
 
 /**
  * \brief           Search callback function implementation
- * \param[in]       ow: 1-Wire handle
+ * \param[in]       owobj: 1-Wire handle
  * \param[in]       rom_id: Rom address when new device detected.
  *                     Set to `NULL` when search finished
  * \param[in]       index: Current device index
