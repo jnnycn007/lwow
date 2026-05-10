@@ -27,12 +27,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *
  * Author:          Tilen MAJERLE <tilen@majerle.eu>
- * Version:         v3.0.2
+ * Version:         v4.0.0
  */
 #include "main.h"
 #include "cmsis_os.h"
-#include "lwow/lwow.h"
 #include "lwow/devices/lwow_device_ds18x20.h"
+#include "lwow/lwow.h"
 #include "scan_devices.h"
 
 static void LL_Init(void);
@@ -52,19 +52,16 @@ size_t rom_found;
  */
 int
 main(void) {
-    LL_Init();                                  /* Reset of all peripherals, initializes the Flash interface and the Systick. */
-    SystemClock_Config();                       /* Configure the system clock */
-    USART_Printf_Init();                        /* Init USART for printf */
+    LL_Init();            /* Reset of all peripherals, initializes the Flash interface and the Systick. */
+    SystemClock_Config(); /* Configure the system clock */
+    USART_Printf_Init();  /* Init USART for printf */
 
     printf("Application running on STM32F429ZI-Nucleo!\r\n");
 
     osKernelInitialize();
-    const osThreadAttr_t app_thread_attr = {
-            .priority = osPriorityNormal,
-            .stack_size = 512
-    };
-    osThreadNew(app_thread, NULL, &app_thread_attr);/* Create application thread */
-    osKernelStart();                            /* Start kernel */
+    const osThreadAttr_t app_thread_attr = {.priority = osPriorityNormal, .stack_size = 512};
+    osThreadNew(app_thread, NULL, &app_thread_attr); /* Create application thread */
+    osKernelStart();                                 /* Start kernel */
 
     while (1) {}
 }
@@ -97,8 +94,8 @@ app_thread(void* arg) {
         /* Infinite loop */
         while (1) {
             printf("Start temperature conversion\r\n");
-            lwow_ds18x20_start(&ow, NULL);      /* Start conversion on all devices, use protected API */
-            osDelay(1000);                      /* Release thread for 1 second */
+            lwow_ds18x20_start(&ow, NULL); /* Start conversion on all devices, use protected API */
+            osDelay(1000);                 /* Release thread for 1 second */
 
             /* Read temperature on all devices */
             avg_temp = 0;
@@ -108,8 +105,8 @@ app_thread(void* arg) {
                     float temp;
                     uint8_t resolution = lwow_ds18x20_get_resolution(&ow, &rom_ids[i]);
                     if (lwow_ds18x20_read(&ow, &rom_ids[i], &temp)) {
-                        printf("Sensor %02u temperature is %d.%d degrees (%u bits resolution)\r\n",
-                            (unsigned)i, (int)temp, (int)((temp * 1000.0f) - (((int)temp) * 1000)), (unsigned)resolution);
+                        printf("Sensor %02u temperature is %d.%d degrees (%u bits resolution)\r\n", (unsigned)i,
+                               (int)temp, (int)((temp * 1000.0f) - (((int)temp) * 1000)), (unsigned)resolution);
 
                         avg_temp += temp;
                         avg_temp_count++;
@@ -121,7 +118,8 @@ app_thread(void* arg) {
             if (avg_temp_count > 0) {
                 avg_temp = avg_temp / avg_temp_count;
             }
-            printf("Average temperature: %d.%d degrees\r\n", (int)avg_temp, (int)((avg_temp * 100.0f) - ((int)avg_temp) * 100));
+            printf("Average temperature: %d.%d degrees\r\n", (int)avg_temp,
+                   (int)((avg_temp * 100.0f) - ((int)avg_temp) * 100));
         }
     }
     printf("Terminating application thread\r\n");
@@ -178,7 +176,7 @@ SystemClock_Config(void) {
 
     /* Configure system clock to PLL */
     LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
-    while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL) {}
+    while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL) {}
 
     /* Configure systick */
     LL_Init1msTick(168000000);
@@ -232,9 +230,11 @@ USART_Printf_Init(void) {
  * \return          Written character
  */
 #ifdef __GNUC__
-int __io_putchar(int ch) {
+int
+__io_putchar(int ch) {
 #else
-int fputc(int ch, FILE* fil) {
+int
+fputc(int ch, FILE* fil) {
 #endif
     LL_USART_TransmitData8(USART3, (uint8_t)ch);
     while (!LL_USART_IsActiveFlag_TXE(USART3)) {}

@@ -29,7 +29,7 @@
  * This file is part of OneWire library.
  *
  * Author:          Tilen MAJERLE <tilen@majerle.eu>
- * Version:         v3.0.2
+ * Version:         v4.0.0
  */
 #ifndef LWOW_HDR_OPTS_H
 #define LWOW_HDR_OPTS_H
@@ -40,6 +40,6 @@
  * Open "include/lwow/lwow_opt.h" and
  * copy & replace here settings you want to change values
  */
-#define LWOW_CFG_OS               1
+#define LWOW_CFG_OS 1
 
 #endif /* LWOW_HDR_OPTS_H */

@@ -2,6 +2,8 @@
 
 ## Develop
 
+## 4.0.0
+
 - Move system functions to `system/lwow_sys.h` file
 - Add support for Platform.IO
 - Split CMakeLists.txt files between library and executable

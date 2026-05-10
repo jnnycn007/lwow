@@ -29,7 +29,7 @@
  * This file is part of LwOW - Lightweight onewire library.
  *
  * Author:          Tilen MAJERLE <tilen@majerle.eu>
- * Version:         v3.0.2
+ * Version:         v4.0.0
  */
 #ifndef LWOW_SYS_HDR_H
 #define LWOW_SYS_HDR_H
