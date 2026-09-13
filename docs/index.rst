@@ -19,15 +19,19 @@ Features
 
 * Written in C (C11), compatible with ``stdint.h`` data types
 * Platform independent, uses custom low-level layer for device drivers
-* 1-Wire protocol fits UART specifications at ``9600`` and ``115200`` bauds
-* Allows standard one-wire single-gpio manual control (when UARTs are no more available by the system)
+* 1-Wire protocol fits UART specifications at ``9600`` and ``115200`` baud
+* Allows standard one-wire single-gpio manual control (when UART peripherals are not available on the system)
 * Hardware is responsible for timing characteristics
-  * Allows DMA on the high-performance microcontrollers
-* Different device drivers included
-  * DS18B20 temperature sensor is natively supported
-* Works with operating system due to hardware timing management
-  * Separate thread-safe API is available
+  * Allows DMA to offload CPU
+* Native driver for DS18x20 family of temperature sensors (DS18B20 and DS18S20)
+  * Configurable sensor resolution from ``9`` to ``12`` bits, with conversion-time helper
+  * Alarm temperature set/get and dedicated alarm search command
 * API for device scan, reading and writing single bits
+  * Bulk device search into an array or through a search callback function
+* Public CRC-8 helper function for custom protocol needs
+* Compatible with an operating system, since hardware handles the timing
+  * Separate thread-safe API is available
+  * Ships with CMSIS-OS, pthread, ThreadX and Win32 system ports
 * User friendly MIT license
 
 Requirements
