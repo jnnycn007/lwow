@@ -3,7 +3,7 @@ LwOW |version| documentation
 
 Welcome to the documentation for version |version|.
 
-LwOW is lightweight, platform independent library for Onewire protocol for embedded systems.
+LwOW is a lightweight, platform independent library for Onewire protocol for embedded systems.
 Its primary focus is UART hardware for physical communication for sensors and other slaves.
 
 .. image:: static/images/logo.svg
